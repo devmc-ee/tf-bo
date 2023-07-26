@@ -1,0 +1,23 @@
+<!-- Toolbar -->
+<nav>
+  <mat-sidenav-container [hasBackdrop]="true">
+    <mat-sidenav #sidenav mode="over" class="sidenav">
+      <mat-list>
+        <mat-list-item> <a href="/menu-groups" routerLink="/menu-groups">Menu
+            Groups</a> </mat-list-item>
+        <mat-list-item><a routerLink="/menu-items" href="/menu-items">Menu
+            Items</a></mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <button mat-icon-button (click)="sidenav.toggle()" class="example-icon"
+          aria-label="Example icon-button with menu icon">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Back office</span>
+      </mat-toolbar>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</nav>
