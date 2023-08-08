@@ -12,7 +12,7 @@
 
     <mat-sidenav-content>
       <mat-toolbar color="primary">
-        <button mat-icon-button (click)="sidenav.toggle()" class="example-icon"
+        <button *ngIf="authService.isLoggedIn" mat-icon-button (click)="sidenav.toggle()" class="example-icon"
           aria-label="Example icon-button with menu icon">
           <mat-icon>menu</mat-icon>
         </button>

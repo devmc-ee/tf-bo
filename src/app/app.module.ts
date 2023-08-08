@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuItemsComponent } from './menu-items/menu-items.component';
 import { MenuGroupsComponent } from './menu-groups/menu-groups.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { AuthModule } from './auth/auth.module';
+// import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToolbarComponent
+    ToolbarComponent,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
