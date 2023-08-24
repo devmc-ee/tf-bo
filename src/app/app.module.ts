@@ -8,7 +8,9 @@ import { MenuItemsComponent } from './menu-items/menu-items.component';
 import { MenuGroupsComponent } from './menu-groups/menu-groups.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AuthModule } from './auth/auth.module';
-// import { MatButtonModule } from '@angular/material/button';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { environment } from 'src/environments/environment';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,34 @@ import { AuthModule } from './auth/auth.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'XSRF-TOKEN',
+      headerName: 'X-XSRF-TOKEN',
+    }),
     AppRoutingModule,
     BrowserAnimationsModule,
     ToolbarComponent,
-    AuthModule
+    AuthModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(environment.googleClientId)
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig
+    } 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,7 @@ import { MenuGroupsComponent } from './menu-groups/menu-groups.component';
 import { MenuItemsComponent } from './menu-items/menu-items.component';
 import { authGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
+import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
   {
@@ -24,13 +25,14 @@ const routes: Routes = [
     ],
   },
   { path: 'login', title: 'Login', component: LoginComponent },
+  { path: 'auth', title: 'auth', component: AuthComponent },
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
       // TODO: add env check
-      enableTracing: true,
+      // enableTracing: true,
     }),
   ],
   exports: [RouterModule],

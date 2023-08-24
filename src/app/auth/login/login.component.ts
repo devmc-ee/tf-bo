@@ -1,28 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-  isLoggedIn: boolean = false;
-
+export class LoginComponent implements OnInit {
   constructor(public authService: AuthService, public router: Router) {
   }
-
-  login() {
-    this.authService.login().subscribe((isLoggedIn) => {
-      if (this.authService.isLoggedIn) {
-        // Usually you would use the redirect URL from the auth service.
-        // However to keep the example simple, we will always redirect to `/admin`.
-        const redirectUrl = '/';
-
-        // Redirect the user
-        this.router.navigate([redirectUrl]);
-      }
+  async ngOnInit() {
+    this.authService.initAuth().subscribe((value) => {
+      this.authService.subscribeAuthState()
     });
   }
 }
