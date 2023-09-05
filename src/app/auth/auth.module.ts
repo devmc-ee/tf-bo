@@ -8,17 +8,35 @@ import { AuthComponent } from './auth.component';
 import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { HTTP_INTERCEPTORS,  } from '@angular/common/http';
 import { AuthCsfrInterceptor } from './auth-csfr.interceptor';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [LoginComponent, AuthComponent],
-  imports: [CommonModule, FormsModule, MatButtonModule, MatCardModule, GoogleSigninButtonModule],
-  exports: [LoginComponent],
+  imports: [CommonModule, FormsModule, MatButtonModule, MatCardModule, GoogleSigninButtonModule, SocialLoginModule],
+  exports: [LoginComponent], 
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthCsfrInterceptor,
       multi: true,
     },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(environment.googleClientId, {
+              oneTapEnabled: false,
+            })
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig
+    } 
   ]
 })
 export class AuthModule { }

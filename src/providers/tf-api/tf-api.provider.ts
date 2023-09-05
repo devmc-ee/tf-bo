@@ -16,8 +16,8 @@ export class TfApiProvider implements IBaseProvider {
     this.baseUrl = environment.apiUrl;
   }
 
-  isAuth(idToken: string): Observable<boolean> {
-    return this.http.post<boolean>(`${this.baseUrl}/auth`, {
+  isAuth(idToken: string): Observable<{ user: unknown, accessToken: string}> {
+    return this.http.post<{ user: unknown, accessToken: string}>(`${this.baseUrl}/auth`, {
       idToken
     }, { withCredentials: true });
   }
@@ -26,7 +26,6 @@ export class TfApiProvider implements IBaseProvider {
     throw new Error('Method not implemented.');
   }
   getCsrf() {
-    console.log('HEAD')
     return this.http.head(`${this.baseUrl}/auth`, {
       withCredentials: true,
     });
