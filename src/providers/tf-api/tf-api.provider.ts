@@ -1,8 +1,6 @@
 import { environment } from 'src/environments/environment';
-import { ITfApiProvider } from './tf-api.type';
 import { IBaseProvider, IBaseRequestOptions } from '../provider.type';
 import { Injectable } from '@angular/core';
-import { AbstractBaseProvider } from '../abstract-base.provier';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
