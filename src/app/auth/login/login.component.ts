@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   }
   async ngOnInit() {
     this.authService.initAuth().subscribe((value) => {
-      console.log({initCsrf: value})
+      console.log({initCsrf: value, cookie: document.cookie})
       this.authService.subscribeAuthState()
     });
   }
