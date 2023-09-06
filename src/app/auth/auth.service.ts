@@ -23,6 +23,7 @@ export class AuthService {
 
   subscribeAuthState() {
     this.authService.authState.subscribe((user) => {
+      console.log('cookie', document.cookie)
       // api auth request
       if (user?.idToken) {
         this.api.isAuth(user.idToken).subscribe({
