@@ -8,6 +8,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { AuthService } from '../auth/auth.service';
 import { NgIf } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -23,5 +24,5 @@ import { NgIf } from '@angular/common';
   ],
 })
 export class ToolbarComponent {
-  constructor(public authService: AuthService) {}
+  constructor(public title: Title, public authService: AuthService) {}
 }

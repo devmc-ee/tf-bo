@@ -8,7 +8,8 @@ import { MenuItemsComponent } from './menu-items/menu-items.component';
 import { MenuGroupsComponent } from './menu-groups/menu-groups.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AuthModule } from './auth/auth.module';
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -19,14 +20,11 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpClientModule,
-    HttpClientXsrfModule.withOptions({
-      cookieName: 'XSRF-TOKEN',
-      headerName: 'X-XSRF-TOKEN',
-    }),
     AppRoutingModule,
     BrowserAnimationsModule,
     ToolbarComponent,
     AuthModule,
+    MatSnackBarModule,
   ],
   bootstrap: [AppComponent]
 })

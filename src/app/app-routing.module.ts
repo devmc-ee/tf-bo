@@ -5,10 +5,12 @@ import { MenuItemsComponent } from './menu-items/menu-items.component';
 import { authGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthComponent } from './auth/auth.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
     path: '',
+    title: 'Back office',
     canActivate: [authGuard],
     canActivateChild: [authGuard],
     children: [
@@ -25,7 +27,7 @@ const routes: Routes = [
     ],
   },
   { path: 'login', title: 'Login', component: LoginComponent },
-  { path: 'auth', title: 'auth', component: AuthComponent },
+  { path: '**', redirectTo: '/' },
 ];
 
 @NgModule({

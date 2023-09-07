@@ -15,7 +15,7 @@
           aria-label="Example icon-button with menu icon">
           <mat-icon>menu</mat-icon>
         </button>
-        <span>Back office</span>
+        <span>{{ title.getTitle() || 'Back office' }}</span>
       </mat-toolbar>
     </mat-sidenav-content>
   </mat-sidenav-container>
