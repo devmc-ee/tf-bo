@@ -1,0 +1,26 @@
+<div class="menu-group-dialog">
+  <div class="menu-group-dialog__header">
+    <h1 mat-dialog-title class="menu-group-dialog__header-title">
+      {{data.mode.toUpperCase()}} GROUP
+    </h1> 
+    <button class="menu-group-dialog__header-close-button" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content class="menu-group-dialog__content">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="data.name" cdkFocusInitial>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput [(ngModel)]="data.description">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="menu-group-dialog__actions">
+    <button class="menu-group-dialog__actions-button" mat-flat-button color="primary" (click)="submit()">
+      SUBMIT
+    </button>
+  </div>
+</div>
+

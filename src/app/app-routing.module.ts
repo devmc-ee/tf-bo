@@ -4,8 +4,6 @@ import { MenuGroupsComponent } from './menu-groups/menu-groups.component';
 import { MenuItemsComponent } from './menu-items/menu-items.component';
 import { authGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
-import { AuthComponent } from './auth/auth.component';
-import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {

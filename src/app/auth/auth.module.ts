@@ -6,8 +6,6 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { AuthComponent } from './auth.component';
 import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
-import { HTTP_INTERCEPTORS,  } from '@angular/common/http';
-import { AuthCsfrInterceptor } from './auth-csfr.interceptor';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -15,11 +13,6 @@ import { environment } from 'src/environments/environment';
   imports: [CommonModule, FormsModule, MatButtonModule, MatCardModule, GoogleSigninButtonModule, SocialLoginModule],
   exports: [LoginComponent], 
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthCsfrInterceptor,
-      multi: true,
-    },
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

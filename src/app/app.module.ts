@@ -10,7 +10,10 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +28,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ToolbarComponent,
     AuthModule,
     MatSnackBarModule,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule
   ],
   bootstrap: [AppComponent]
 })
