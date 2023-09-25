@@ -11,7 +11,7 @@
         All
       </div>
       <div class="menu-groups__list-item" [ngClass]="selectedGroup?.id === group.id ? 'menu-groups__list-item--selected' : ''" (click)="selectGroup(group.id)" *ngFor="let group of menuList">
-        {{ group.name }} - <mat-chip> {{ group.items.length }}</mat-chip>
+        {{ group.name }} <mat-chip> {{ group.items.length }}</mat-chip>
       </div>
     </div>
   </div>
