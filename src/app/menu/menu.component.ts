@@ -30,7 +30,17 @@ export class MenuComponent implements OnInit {
     this.menuService.getMenu().subscribe({
       next: (data) => {
         this.menuList = data;
-        this.menuFilteredList = data;
+
+        if (!this.selectedGroup) {
+          this.menuFilteredList = this.menuList;
+        } else {
+          const { id: groupId } = this.selectedGroup;
+          this.selectedGroup = this.menuList.find(({ id }) => id === groupId) as IMenu;
+
+          this.menuFilteredList = !this.selectedGroup  
+            ? this.menuList
+            : [this.selectedGroup]
+        }
       },
       error: (error) => console.error(error),
     })
