@@ -14,11 +14,15 @@ import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { WorkingTimeComponent } from './working-time/working-time.component';
+import { MenuModule } from './menu/menu.module';
+
 @NgModule({
   declarations: [
     AppComponent,
     MenuItemsComponent,
     MenuGroupsComponent,
+    WorkingTimeComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MenuModule,
   ],
   bootstrap: [AppComponent]
 })

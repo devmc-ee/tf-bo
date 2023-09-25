@@ -1,0 +1,77 @@
+<div class="page-content menu">
+  <div class="menu-groups">
+    <h2>Groups</h2>
+    <div class="menu-items__group-actions">
+      <button class="icon-button" (click)="addGroup()" color="primary" aria-label="edit group">
+        <mat-icon aria-label="add group">add</mat-icon> <div class="icon-button-label">Add group</div>
+      </button> 
+    </div>
+    <div  class="menu-groups__list" role="list">
+      <div class="menu-groups__list-item" (click)="selectGroup('')">
+        All
+      </div>
+      <div class="menu-groups__list-item" [ngClass]="selectedGroup?.id === group.id ? 'menu-groups__list-item--selected' : ''" (click)="selectGroup(group.id)" *ngFor="let group of menuList">
+        {{ group.name }} - <mat-chip> {{ group.items.length }}</mat-chip>
+      </div>
+    </div>
+  </div>
+  <div class="menu-items">
+    <div class="menu-items__header">
+      <div class="menu-items__group-title">
+        <h2>{{ selectedGroup?.name || 'All items' }}</h2>
+        <h4>{{ selectedGroup?.description || '' }}</h4>
+      </div>
+      <div *ngIf="selectedGroup?.id" class="menu-items__group-actions">
+        <button class="icon-button" (click)="selectedGroup?.id && addItem(selectedGroup?.id || '')" color="primary" aria-label="edit group">
+          <mat-icon aria-label="add group">add</mat-icon> <div class="icon-button-label">Add item</div>
+        </button> 
+      </div>
+    </div>
+    <div class="menu-items__list">
+      <div class="menu-items__group-list" role="list"  *ngFor="let group of menuFilteredList">
+        <div *ngIf="!selectedGroup" class="menu-items__group" role="listitem" >
+          
+          <span class="menu-items__group-name">{{group.name}}</span>
+          <div class="menu-items__group-actions">
+            <button mat-icon-button (click)="editGroup(group.id)" color="primary" aria-label="edit group">
+              <mat-icon>edit</mat-icon>
+            </button> 
+            <button  mat-icon-button [disabled]="group.items.length > 0" (click)="deleteGroup(group.id)" color="primary" aria-label="remove group">
+              <mat-icon>delete</mat-icon>
+            </button> 
+          </div>
+        </div>
+
+        <div *ngIf="!group.items.length"> No items </div>
+        <div *ngIf="group.items.length" role="list"  >
+          <div class="menu-items__group-item" *ngFor="let item of group.items" role="listitem" >
+            <div class="menu-items__group-item-content">
+              <span class="menu-items__group-item-code">
+                {{item.code}}
+              </span>
+              <span class="menu-items__group-item-name">
+                {{item.name}}
+              </span>
+              <span class="menu-items__group-item-description">
+                {{item.description}}
+              </span>
+              <span class="menu-items__group-item-price">
+                {{item.price}}
+              </span>
+            </div>
+            
+            <div class="menu-items__group-item-actions">
+              <button mat-icon-button (click)="editGroup(item.id)" color="primary" aria-label="edit item">
+                <mat-icon>edit</mat-icon>
+              </button> 
+              <button mat-icon-button (click)="deleteGroup(item.id)" color="primary" aria-label="remove item">
+                <mat-icon>delete</mat-icon>
+              </button> 
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

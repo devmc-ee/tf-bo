@@ -29,8 +29,8 @@ export class TfApiProvider implements IBaseProvider {
     throw new Error('Method not implemented.');
   }
 
-  get(url: string, options?: IBaseRequestOptions): Observable<unknown> {
-    return this.http.get<unknown>(`${this.baseUrl}${url}`)
+  get(url: string, options?: IBaseRequestOptions) {
+    return this.http.get(`${this.baseUrl}${url}`)
   }
 
   post(url: string, data: unknown, options?: IBaseRequestOptions) {

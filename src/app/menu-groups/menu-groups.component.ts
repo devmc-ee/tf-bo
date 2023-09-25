@@ -4,7 +4,6 @@ import { MenuGroup, MenuGroupColumn } from './menu-groups.type';
 import { MatDialog } from '@angular/material/dialog';
 import { MenuGroupDialogComponent } from './menu-group-dialog/menu-group-dialog.component';
 import { DIALOG_MODE } from '../app.type';
-import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-menu-groups',
