@@ -1,9 +1,7 @@
 .menu {
   width: 100%;
   margin: 0 auto;
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: minmax(200px, 1fr) 3fr;
+  max-width: 1200px;
   &-groups {
     &__list {
 
@@ -22,50 +20,75 @@
     }
   }
   &-items{
+    padding-bottom: 6rem;
     &__header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0rem 1rem 1rem;
+
     }
     &__group {
       display: flex;
       align-items: center;
-      padding: 0.5rem 0;
-
+      padding: 1rem 0rem 1rem 1rem;
+      justify-content: space-between;
       border-bottom:  1px solid lightgray;
+      background-color: #f9f9f9;
       &:first-child {
         border-top:  1px solid lightgray;
       }
       &-title {
-        & h2 {
+        & h2,  & h1 {
           white-space: nowrap;
+          margin: 0;
+          font-weight: 600;
         }
         & h4 {
           color: gray;
         }
       }
+      &-code {
+        word-break: break-word;
+      }
       &-name {
+        word-break: break-word;
         width: 100%;
         font-weight: 600;
         white-space: nowrap;
+        margin: 0;
+        padding-right: 1rem;
+        &-description {
+          display: flex;
+          flex-direction: column;
+          word-break: break-word;
+        }
       }
       &-list {
       }
 
+      &-no-items {
+        padding: 1rem;
+        text-align: center;
+        border-bottom:  1px solid lightgray;
+        color: gray;
+      }
 
       &-actions {
         display: flex;
-        width: 100%;
         justify-content: flex-end;
         align-items: center;
         padding: 0.5rem;
-
+        &-label {
+          white-space: nowrap;
+        }
         &--first {
           justify-content: center;
         }
       }
       &-item {
-        cursor: pointer;
         display: flex;
+        padding: 1rem 0rem 1rem 1rem;
 
         border-bottom:  1px solid lightgray;
         &:first-child {
@@ -85,9 +108,36 @@
         }
         &-content {
           width: 100%;
-          display: grid;
-          align-items: center;
-          grid-template-columns: 1fr 2fr 3fr 1fr;
+
+
+          &-headers{
+            display: none;
+          }
+          &-item{
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0;
+            font-size: 1rem;
+            &-label {
+              font-size: 12px;
+              font-weight: 600;
+            }
+          }
+
+          @media screen and (min-width: 460px) {
+
+            display: grid;
+            align-items: center;
+            grid-template-columns: 1fr 2fr 3fr 1fr;
+
+            &-headers{
+              width: 100%;
+              display: grid;
+              align-items: center;
+              grid-template-columns: 1fr 2fr 3fr 1fr;
+            }
+          }
+
         }
       }
     }

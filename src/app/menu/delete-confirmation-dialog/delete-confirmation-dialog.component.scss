@@ -1,7 +1,7 @@
   :host {
-    .menu-group-dialog {
+    .delete-confirmation-dialog {
       padding: 1.5rem;
-  
+
       &__header {
           display: flex;
           justify-content: space-between;
@@ -26,9 +26,9 @@
         padding: 0;
       }
   
-      &__actions {
+      &__actions.mat-mdc-dialog-actions {
         padding: 0;
-  
+        justify-content: space-between;
         &-button {
           width: 100%;
         }

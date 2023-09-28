@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MenuGroupsComponent } from './menu-groups/menu-groups.component';
-import { MenuItemsComponent } from './menu-items/menu-items.component';
 import { authGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { WorkingTimeComponent } from './working-time/working-time.component';
@@ -18,16 +16,6 @@ const routes: Routes = [
         path: '',
         title: 'Menu',
         component: MenuComponent,
-      },
-      {
-        path: 'menu-groups',
-        title: 'Menu Groups',
-        component: MenuGroupsComponent,
-      },
-      {
-        path: 'menu-items',
-        title: 'Menu Items',
-        component: MenuItemsComponent,
       },
       {
         path: 'working-time',

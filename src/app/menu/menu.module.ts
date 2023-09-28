@@ -8,6 +8,9 @@ import {MatListModule} from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatMenuModule} from '@angular/material/menu';
+
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [MenuComponent],
@@ -18,7 +21,9 @@ import {MatChipsModule} from '@angular/material/chips';
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    MatChipsModule
+    MatChipsModule,
+    MatMenuModule,
+    MatAutocompleteModule
   ],
   providers: [MenuProvider]
 })

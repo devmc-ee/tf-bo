@@ -10,6 +10,8 @@ import { MenuProvider } from '../menu.provider';
 import { DIALOG_MODE } from 'src/app/app.type';
 import { firstValueFrom } from 'rxjs';
 import { MenuGroupDto } from '../dto/menu-group.dto';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'menu-group-dialog',
@@ -24,19 +26,38 @@ export class MenuGroupDialogComponent {
     public dialogRef: MatDialogRef<MenuGroupDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: MenuGroupDialogData,
     public readonly menuGroupService: MenuProvider,
+    private snackBar: MatSnackBar,
   ) { }
 
-  async submit() {
-    try {
-      if (this.data.mode === DIALOG_MODE.NEW) {
-        firstValueFrom(await this.menuGroupService.createGroup(new MenuGroupDto(this.data)));
-      } else {
-        firstValueFrom( await this.menuGroupService.editGroup(this.data.id, new MenuGroupDto(this.data)));
-      }
-
-      this.dialogRef.close();
-    } catch (error) {
-      console.error(error)
+  submit() {
+    if (this.data.mode === DIALOG_MODE.NEW) {
+      this.menuGroupService.createGroup(new MenuGroupDto(this.data)).subscribe({
+        next: () => this.snackBar.open('Done!', 'X', {
+          verticalPosition: 'top',
+          duration: 1000
+        }),
+        error: (error) => {
+          console.log('ADD GROUP ERROR', error);
+          this.snackBar.open((error as HttpErrorResponse)?.error?.message || (error as HttpErrorResponse)?.statusText || 'something wrong', 'X', {
+            verticalPosition: 'top'
+          });
+        }
+      });
+    } else {
+      this.menuGroupService.editGroup(this.data.id, new MenuGroupDto(this.data)).subscribe({
+        next: () => this.snackBar.open('Done!', 'X', {
+          verticalPosition: 'top',
+          duration: 1000
+        }),
+        error: (error) => {
+          console.log('EDIT GROUP ERROR', error);
+          this.snackBar.open((error as HttpErrorResponse)?.error?.message || (error as HttpErrorResponse)?.statusText || 'something wrong', 'X', {
+            verticalPosition: 'top'
+          });
+        }
+      });
     }
+
+    this.dialogRef.close();
   }
 }

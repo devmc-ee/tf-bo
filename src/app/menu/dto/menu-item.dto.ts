@@ -11,6 +11,14 @@ export class MenuItemDto {
   code = '';
 
   constructor(group: Partial<IMenuItem>) {
-    Object.assign(this, group);
+    const entries = [];
+
+    for (const key in this) {
+      if (group[key as keyof IMenuItem]) {
+        entries.push([key, group[key as keyof IMenuItem]]);
+      }
+    }
+
+    Object.assign(this, Object.fromEntries(entries));
   }
 }

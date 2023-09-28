@@ -1,0 +1,19 @@
+<div class="delete-confirmation-dialog">
+    <h1 mat-dialog-title class="delete-confirmation-dialog__header-title">
+      Delete {{data.type}}?
+    </h1> 
+  <div mat-dialog-content class="delete-confirmation-dialog__content">
+    You are about to delete: 
+    <p><strong>{{entityName}}</strong></p>
+    <p>Are you sure about that?</p>
+  </div>
+  <div mat-dialog-actions class="delete-confirmation-dialog__actions">
+    <button class="delete-confirmation-dialog__actions-button" mat-flat-button color="primary" (click)="dialogRef.close()">
+      NO
+    </button>
+    <button class="delete-confirmation-dialog__actions-button" mat-flat-button color="accent" (click)="confirm()">
+      YES
+    </button>
+  </div>
+</div>
+

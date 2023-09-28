@@ -12,11 +12,11 @@ export class MenuProvider extends TfApiProvider {
     return this.get(`${this.menuUrl}?empty-groups=true`) as Observable<IMenu[]> ;
   }
 
-  async createGroup({name, description}: MenuGroupBase) {
+  createGroup({name, description}: MenuGroupBase) {
     return this.post(this.menuGroupsUrl, {name, description});
   }
 
-  async createItem(menuItem: MenuItemDto) {
+  createItem(menuItem: MenuItemDto) {
     return this.post(this.menuItemsUrl, menuItem);
   }
 
@@ -24,12 +24,16 @@ export class MenuProvider extends TfApiProvider {
     return this.delete(this.menuGroupsUrl, id);
   }
 
-  async editGroup(id: string, data: Partial<MenuGroupBase>) {
+  deleteItem(id: string) {
+    return this.delete(this.menuItemsUrl, id);
+  }
+
+  editGroup(id: string, data: Partial<MenuGroupBase>) {
     return this.patch(this.menuGroupsUrl, id, data);
   }
 
-  async editItem(id: string, data: Partial<MenuItemDto>) {
-    return this.patch(this.menuGroupsUrl, id, data);
+  editItem(id: string, data: Partial<MenuItemDto>) {
+    return this.patch(this.menuItemsUrl, id, data);
   }
 
 

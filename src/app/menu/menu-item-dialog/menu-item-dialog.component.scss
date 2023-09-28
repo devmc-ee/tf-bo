@@ -1,7 +1,10 @@
   :host {
     .menu-item-dialog {
       padding: 1.5rem;
-  
+
+      @media screen and (min-width: 460px) {
+        width: 460px;
+      }
       &__header {
           display: flex;
           justify-content: space-between;

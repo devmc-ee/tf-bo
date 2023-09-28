@@ -9,6 +9,14 @@
   </div>
   <div mat-dialog-content class="menu-item-dialog__content">
     <mat-form-field>
+      <mat-label>Group</mat-label>
+      <mat-select [(value)]="data.groupId">
+        <mat-option *ngFor="let group of data.groups" [value]="group.id">
+          {{group.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
       <mat-label>Code</mat-label>
       <input matInput [(ngModel)]="data.code" cdkFocusInitial>
     </mat-form-field>

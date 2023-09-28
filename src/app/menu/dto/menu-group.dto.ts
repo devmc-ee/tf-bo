@@ -5,6 +5,14 @@ export class MenuGroupDto {
   description = '';
 
   constructor(group: Partial<MenuGroup>) {
-    Object.assign(this, group);
+    const entries = [];
+
+    for (const key in this) {
+      if (group[key as keyof MenuGroup]) {
+        entries.push([key, group[key as keyof MenuGroup]]);
+      }
+    }
+
+    Object.assign(this, Object.fromEntries(entries));
   }
 }

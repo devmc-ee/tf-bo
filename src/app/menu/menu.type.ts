@@ -39,5 +39,18 @@ export interface IMenu extends MenuGroup {
 }
 
 export interface MenuItemDialogData extends IMenuItem {
-  mode: APP.DialogMode
+  mode: APP.DialogMode,
+  groups: MenuGroup[],
+  group: IMenu,
+}
+
+export const MENU_ENTITY_TYPE = {
+  GROUP: 'group',
+  ITEM: 'item',
+} as const;
+export interface IMenuDeleteConfirmationData {
+  id?: string;
+  type: typeof MENU_ENTITY_TYPE[keyof typeof MENU_ENTITY_TYPE];
+  menu: IMenu[];
+  groupId: string;
 }
