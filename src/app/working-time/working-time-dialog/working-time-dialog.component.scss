@@ -1,0 +1,48 @@
+:host {
+  .working-time-dialog {
+    padding: 1.5rem;
+
+    @media screen and (min-width: 460px) {
+      width: 460px;
+    }
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1rem;
+        h1 {
+          margin: 0;
+          padding: 0;
+
+          &::before {
+            display: none;
+          }
+        }
+        &-close-button {
+          transform: translateX(1rem);
+        }
+    }
+
+    &__content{
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+
+      &-open-state {
+        padding-bottom: 1rem;
+      }
+
+      &-comment{
+        width: 100%;
+      }
+    }
+
+    &__actions {
+      padding: 0;
+
+      &-button {
+        width: 100%;
+      }
+    }
+  }
+}

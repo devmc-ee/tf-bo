@@ -12,13 +12,14 @@ import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { WorkingTimeComponent } from './working-time/working-time.component';
 import { MenuModule } from './menu/menu.module';
-
+import { WorkingTimeModule } from './working-time/working-time.module';
+import { NgFor, NgIf} from '@angular/common';
+import { MatMenuModule , MatMenu} from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [
     AppComponent,
-    WorkingTimeComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,12 @@ import { MenuModule } from './menu/menu.module';
     MatIconModule,
     MatDialogModule,
     MenuModule,
+    WorkingTimeModule,
+    NgFor,
+    NgIf,
+    MatMenuModule,
+    MatRadioModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

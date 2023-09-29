@@ -1,0 +1,37 @@
+<div class="working-time-dialog">
+  <div class="working-time-dialog__header">
+    <h1 mat-diaITEMlog-title class="working-time-dialog__header-title">
+      {{data.weekday.toUpperCase()}}
+    </h1> 
+    <button class="working-time-dialog__header-close-button" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content class=" working-time-dialog__content">
+    <mat-radio-group class="working-time-dialog__content-open-state" [(ngModel)]="data.isOpen" aria-label="Select an option" >
+      <mat-radio-button [value]="true" cdkFocusInitial>Open</mat-radio-button>
+      <mat-radio-button [value]="false">Closed</mat-radio-button>
+    </mat-radio-group>
+    <div *ngIf="data.isOpen" class="working-time-dialog__content-field working-time-dialog__content--open">
+      <mat-form-field>
+        <mat-label>Start</mat-label>
+        <input matInput type="time" [max]="data.end" matInput [(ngModel)]="data.start">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>End</mat-label>
+        <input type="time" matInput [min]="data.start" [(ngModel)]="data.end" >
+      </mat-form-field>
+    </div>
+    <div  *ngIf="!data.isOpen" class="working-time-dialog__content-field working-time-dialog__content--closed">
+      <mat-form-field class="working-time-dialog__content-comment">
+        <mat-label>Comment (optional)</mat-label>
+        <input matInput [(ngModel)]="data.comment" >
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions class="working-time-dialog__actions">
+    <button class="working-time-dialog__actions-button" mat-flat-button color="primary" (click)="submit()">
+      SUBMIT
+    </button>
+  </div>
+</div>

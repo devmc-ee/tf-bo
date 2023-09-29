@@ -1,1 +1,22 @@
-<p>working-time works!</p>
+
+<div class="page-content working-time__page">
+  <h1>Working time</h1>
+  <div class="working-time__list">
+    <div *ngFor="let workingTime of workingTimes" class="working-time__item">
+      <div class="working-time__item-content">
+        <div class="working-time__item-weekday">
+          <strong>{{workingTime.weekday.slice(0, 1).toUpperCase()}}{{workingTime.weekday.slice(1)}}</strong>:
+        </div>
+        <div class="working-time__item-time">
+          <span *ngIf="workingTime.isOpen"> {{ workingTime.start}} - {{ workingTime.end}} </span>
+          <span *ngIf="!workingTime.isOpen"> Closed </span>
+          <span *ngIf="!workingTime.isOpen && workingTime.comment" >({{workingTime.comment}})</span>
+        </div>
+      </div>
+
+       <button mat-icon-button (click)="edit(workingTime.id)" color="primary" aria-label="edit working time">
+        <mat-icon>edit</mat-icon>
+      </button> 
+    </div>
+  </div>
+</div>

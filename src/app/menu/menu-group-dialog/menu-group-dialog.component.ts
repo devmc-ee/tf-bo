@@ -8,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MenuProvider } from '../menu.provider';
 import { DIALOG_MODE } from 'src/app/app.type';
-import { firstValueFrom } from 'rxjs';
 import { MenuGroupDto } from '../dto/menu-group.dto';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
