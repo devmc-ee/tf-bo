@@ -34,26 +34,14 @@ export class TfApiProvider implements IBaseProvider {
   }
 
   post(url: string, data: unknown, options?: IBaseRequestOptions) {
-    return this.http.post(this.getFullUrl(url), data, {
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      }
-    })
+    return this.http.post(this.getFullUrl(url), data)
   }
   
   patch(url: string, id: string, data: unknown, options?: IBaseRequestOptions) {
-    return this.http.patch(this.getFullUrl(url, id), data, {
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      }
-    });
+    return this.http.patch(this.getFullUrl(url, id), data);
   }
 
   delete(url: string, id: string, options?: IBaseRequestOptions) {
-    return this.http.delete(this.getFullUrl(url, id), {
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      }
-    });
+    return this.http.delete(this.getFullUrl(url, id));
   }
 }

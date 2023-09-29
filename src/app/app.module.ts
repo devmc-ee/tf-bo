@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AuthModule } from './auth/auth.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
@@ -15,8 +15,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MenuModule } from './menu/menu.module';
 import { WorkingTimeModule } from './working-time/working-time.module';
 import { NgFor, NgIf} from '@angular/common';
-import { MatMenuModule , MatMenu} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
+import { AuthInterceptor } from './auth/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,5 +42,10 @@ import {MatRadioModule} from '@angular/material/radio';
     MatRadioModule
   ],
   bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,
+    }
+  ]
 })
 export class AppModule { }

@@ -44,7 +44,7 @@ export class WorkingTimeComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: () => this.updateData(),
       error: (error) => {
-        console.log(error)
+        console.log((error as HttpErrorResponse).status , error)
       } 
     })
   }
