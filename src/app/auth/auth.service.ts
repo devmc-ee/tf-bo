@@ -18,8 +18,12 @@ export class AuthService {
     private api: TfApiProvider,
     private snackBar: MatSnackBar,
   ) {
-    this.accessToken = localStorage.getItem('tf_bo_at') || '';
+    this.accessToken = this.getToken();
     this.isLoggedIn = !!this.accessToken;
+  }
+
+  getToken() {
+    return localStorage.getItem('tf_bo_at') || '';
   }
 
   authorize() {

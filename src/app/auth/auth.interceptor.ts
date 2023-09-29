@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(
       request.clone({ 
         setHeaders: { 
-          authorization: `Bearer ${this.authService.accessToken}`  
+          authorization: `Bearer ${this.authService.getToken()}`  
         }}
   )).pipe(
       tap({
