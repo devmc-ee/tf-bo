@@ -42,7 +42,8 @@ export class MenuItemDialogComponent {
         error: (error) => {
           console.log('ADD ITEM ERROR', error);
           this.snackBar.open((error as HttpErrorResponse)?.error?.message || (error as HttpErrorResponse)?.statusText || 'something wrong', 'X', {
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            duration: 4000
           });
         }
       });
@@ -55,7 +56,8 @@ export class MenuItemDialogComponent {
         error: (error) => {
           console.log('EDIT ITEM ERROR', error);
           this.snackBar.open((error as HttpErrorResponse)?.error?.message || (error as HttpErrorResponse)?.statusText || 'something wrong', 'X', {
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            duration: 4000
           });
         }
       });

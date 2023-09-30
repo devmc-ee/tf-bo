@@ -51,6 +51,13 @@
         <div *ngIf="group.items.length" role="list"  >
           <div class="menu-items__group-item" *ngFor="let item of group.items" role="listitem" >
             <div class="menu-items__group-item-content">
+              <div class="menu-items__group-item-content-item menu-items__group-item-status">
+                <span class="menu-items__group-item-content-item-label">Visible</span>
+                <span> 
+                  <mat-icon class="menu-items__group-item-content-item-label-icon--visible" *ngIf="!item.hidden">visibility</mat-icon>
+                  <mat-icon class="menu-items__group-item-content-item-label-icon--hidden" *ngIf="item.hidden">visibility_off</mat-icon>
+                </span>
+              </div>
               <div class="menu-items__group-item-content-item menu-items__group-item-code">
                 <span class="menu-items__group-item-content-item-label">Code</span>
                 <span>{{item.code}}</span>
@@ -74,6 +81,12 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="toggleVisibility(item.id, group.id)" color="primary" aria-label="toggle visibility">
+                  <mat-icon *ngIf="item.hidden">visibility</mat-icon>
+                  <mat-icon *ngIf="!item.hidden">visibility_off</mat-icon>
+                  <span *ngIf="!item.hidden">Hide item</span>
+                  <span *ngIf="item.hidden">Unhide item</span>
+                </button> 
                 <button mat-menu-item (click)="editItem(item.id, group.id)" color="primary" aria-label="edit item">
                   <mat-icon>edit</mat-icon>
                   <span>Edit item</span>

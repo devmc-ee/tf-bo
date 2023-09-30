@@ -120,6 +120,12 @@
             &-label {
               font-size: 12px;
               font-weight: 600;
+
+              &-icon {
+                &--visible {
+                  color: green;
+                }
+              }
             }
           }
 
@@ -127,7 +133,7 @@
 
             display: grid;
             align-items: center;
-            grid-template-columns: 1fr 2fr 3fr 1fr;
+            grid-template-columns: 120px 1fr 2fr 3fr 1fr;
 
             &-headers{
               width: 100%;

@@ -1,5 +1,5 @@
 import { TfApiProvider } from 'src/providers/tf-api/tf-api.provider';
-import { IMenu, IMenuIteBase, MenuGroupBase } from './menu.type';
+import { IMenu, MenuGroupBase } from './menu.type';
 import { Observable } from 'rxjs';
 import { MenuItemDto } from './dto/menu-item.dto';
 
@@ -9,7 +9,7 @@ export class MenuProvider extends TfApiProvider {
   menuGroupsUrl = '/resto/v1/menu-groups';
 
   getMenu() {
-    return this.get(`${this.menuUrl}?empty-groups=true`) as Observable<IMenu[]> ;
+    return this.get(`${this.menuUrl}?all=true`) as Observable<IMenu[]> ;
   }
 
   createGroup({name, description}: MenuGroupBase) {

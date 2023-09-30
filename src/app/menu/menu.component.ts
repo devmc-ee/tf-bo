@@ -6,6 +6,8 @@ import { MenuItemDialogComponent } from './menu-item-dialog/menu-item-dialog.com
 import { DIALOG_MODE } from '../app.type';
 import { MenuGroupDialogComponent } from './menu-group-dialog/menu-group-dialog.component';
 import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-menu',
@@ -23,6 +25,8 @@ export class MenuComponent implements OnInit {
   constructor(
     private readonly menuService: MenuProvider,
     private readonly dialog: MatDialog,
+    private readonly snackBar: MatSnackBar,
+
   ) {}
 
   ngOnInit(): void {
@@ -147,6 +151,37 @@ export class MenuComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => {
       this.updateData();
+    })
+  }
+
+  toggleVisibility(itemId: string, groupId: string) {
+    const group = this.menuList.find(({ id }) => id === groupId);
+    if (!group) {
+      return;
+    }
+
+    const item = group.items.find(({ id }) => id === itemId);
+
+    if (!item) {
+      return;
+    }
+
+    this.menuService.editItem(itemId, {
+      hidden: !item.hidden,
+    }).subscribe({
+      next: () => {
+        this.snackBar.open('Done!', 'X', {
+          verticalPosition: 'top',
+          duration: 1000
+        });
+        this.updateData()
+      },
+      error: (error) => {
+        this.snackBar.open((error as HttpErrorResponse)?.error?.message || (error as HttpErrorResponse)?.statusText || 'something wrong', 'X', {
+          verticalPosition: 'top',
+          duration: 4000
+        });
+      }
     })
   }
 }
