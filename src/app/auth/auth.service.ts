@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TfApiProvider } from 'src/providers/tf-api/tf-api.provider';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthProvider } from './auth.provider';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class AuthService {
     private router: Router, 
     private api: TfApiProvider,
     private snackBar: MatSnackBar,
+    private authProvider: AuthProvider,
   ) {
     this.accessToken = this.getToken();
     this.isLoggedIn = !!this.accessToken;
@@ -34,7 +36,7 @@ export class AuthService {
           this.api.isAuth(user.idToken).subscribe({
             next: ({ user, accessToken }) => {
               // TODO: add storage
-              localStorage.setItem('tf_bo_at', accessToken);
+              this.setAccessToken(accessToken);
               this.isLoggedIn = true;
               this.router.navigate(['/']);
             },
@@ -57,6 +59,14 @@ export class AuthService {
     })
   }
 
+  refreshToken() {
+    return this.authProvider.refreshToken();
+  }
+
+  setAccessToken(token: string) {
+    localStorage.setItem('tf_bo_at', token);
+  }
+  
   logout(): void {
     localStorage.removeItem('tf_bo_at');
     this.isLoggedIn = false;

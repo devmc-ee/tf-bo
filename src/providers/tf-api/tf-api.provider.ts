@@ -34,11 +34,14 @@ export class TfApiProvider implements IBaseProvider {
   }
 
   post(url: string, data: unknown, options?: IBaseRequestOptions) {
-    return this.http.post(this.getFullUrl(url), data)
+    return this.http.post(this.getFullUrl(url), data, { 
+      ...options,
+      withCredentials: true 
+    })
   }
   
   patch(url: string, id: string, data: unknown, options?: IBaseRequestOptions) {
-    return this.http.patch(this.getFullUrl(url, id), data);
+    return this.http.patch(this.getFullUrl(url, id), data,);
   }
 
   delete(url: string, id: string, options?: IBaseRequestOptions) {

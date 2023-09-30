@@ -7,6 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import { AuthComponent } from './auth.component';
 import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { environment } from 'src/environments/environment';
+import { AuthProvider } from './auth.provider';
 
 @NgModule({
   declarations: [LoginComponent, AuthComponent],
@@ -29,7 +30,8 @@ import { environment } from 'src/environments/environment';
           console.error(err);
         }
       } as SocialAuthServiceConfig
-    } 
+    },
+    AuthProvider
   ]
 })
 export class AuthModule { }
