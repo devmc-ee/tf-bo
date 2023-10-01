@@ -11,6 +11,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu';
 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {CloudinaryModule} from '@cloudinary/ng';
 
 @NgModule({
   declarations: [MenuComponent],
@@ -23,7 +24,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatButtonModule,
     MatChipsModule,
     MatMenuModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    CloudinaryModule
   ],
   providers: [MenuProvider]
 })

@@ -133,14 +133,7 @@
 
             display: grid;
             align-items: center;
-            grid-template-columns: 120px 1fr 2fr 3fr 1fr;
-
-            &-headers{
-              width: 100%;
-              display: grid;
-              align-items: center;
-              grid-template-columns: 1fr 2fr 3fr 1fr;
-            }
+            grid-template-columns: 70px 100px  1fr 2fr 3fr 1fr;
           }
 
         }

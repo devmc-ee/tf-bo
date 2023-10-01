@@ -18,6 +18,7 @@ import { NgFor, NgIf} from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import {CloudinaryModule} from '@cloudinary/ng';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     NgFor,
     NgIf,
     MatMenuModule,
-    MatRadioModule
+    MatRadioModule,
+    CloudinaryModule
   ],
   bootstrap: [AppComponent],
   providers: [

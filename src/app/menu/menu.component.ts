@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IMenu, MENU_ENTITY_TYPE, MenuGroup } from './menu.type';
+import { IMenu, IMenuCdn, MENU_ENTITY_TYPE, MenuGroup } from './menu.type';
 import { MenuProvider } from './menu.provider';
 import { MatDialog } from '@angular/material/dialog';
 import { MenuItemDialogComponent } from './menu-item-dialog/menu-item-dialog.component';
@@ -8,7 +8,17 @@ import { MenuGroupDialogComponent } from './menu-group-dialog/menu-group-dialog.
 import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Cloudinary, CloudinaryImage, CloudinaryFile } from '@cloudinary/url-gen';
+import { environment } from 'src/environments/environment';
+import { thumbnail } from '@cloudinary/url-gen/actions/resize';
+import { focusOn } from '@cloudinary/url-gen/qualifiers/gravity';
+import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
+import { format, quality } from '@cloudinary/url-gen/actions/delivery';
+import { auto } from '@cloudinary/url-gen/qualifiers/quality';
+import { lazyload, placeholder } from '@cloudinary/ng';
+import { Plugins } from '@cloudinary/html';
 
+import * as cdnRes from '@cloudinary/url-gen';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -16,11 +26,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class MenuComponent implements OnInit {
   menuList: IMenu[] = [];
-  menuFilteredList: IMenu[] = [];
+  menuFilteredList: IMenuCdn[] = [];
   selectedGroup: IMenu | null = null;
   groupTitle = 'All items';
   groupSubTitle = '';
   menuGroups: MenuGroup[] = [];
+  img!: CloudinaryImage;
+  cdn!: Cloudinary;
+  plugins!: Plugins;
 
   constructor(
     private readonly menuService: MenuProvider,
@@ -31,6 +44,61 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateData();
+
+    this.cdn = new Cloudinary({
+      cloud: {
+        cloudName: environment.cdnName
+      }
+    })
+    this.plugins = [lazyload(), placeholder()];
+
+    // @ts-ignore cloudinary global
+  }
+
+
+  uploadImage(itemId: string, groupId: string) {
+    // @ts-ignore
+    const widget = cloudinary!.createUploadWidget(
+      {
+        cloudName: environment.cdnName,
+        uploadPreset: environment.cdnUploadPreset,
+        // cropping: true, //add a cropping step
+        showAdvancedOptions: true,  //add advanced options (public_id and tag)
+        sources: [ "local", "url"], // restrict the upload sources to URL and local files
+        multiple: false,  //restrict upload to a single file
+        folder: "menu", //upload files to the specified folder
+        // tags: ["users", "profile"], //add the given tags to the uploaded files
+        // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
+        clientAllowedFormats: ['jpg', 'png', 'webp'], //restrict uploading to image files only
+        // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
+        // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+        // theme: "purple", //change to a purple theme
+      },
+    // @ts-ignore cloudinary global
+      (error, result) => {
+        if (!error && result && result.event === "success") {
+          console.log("Done! Here is the image info: ", result.info);
+          this.menuService.editItem(itemId, {
+            image: result.info.public_id,
+          }).subscribe({
+            next: () => {
+              this.snackBar.open('Done!', 'X', {
+                verticalPosition: 'top',
+                duration: 1000
+              });
+              this.updateData()
+            },
+            error: (error) => {
+              this.snackBar.open((error as HttpErrorResponse)?.error?.message || (error as HttpErrorResponse)?.statusText || 'something wrong', 'X', {
+                verticalPosition: 'top',
+                duration: 4000
+              });
+            }
+          })
+        }
+      }
+    );
+    widget.open();
   }
 
   updateData() {
@@ -40,27 +108,23 @@ export class MenuComponent implements OnInit {
 
         this.menuGroups = data.map(({ id, name, description }) => ({ id, name, description }));
 
-        if (!this.selectedGroup) {
-          this.menuFilteredList = this.menuList;
-        } else {
-          const { id: groupId } = this.selectedGroup;
-          this.selectedGroup = this.menuList.find(({ id }) => id === groupId) as IMenu;
-
-          this.menuFilteredList = !this.selectedGroup  
-            ? this.menuList
-            : [this.selectedGroup]
-        }
+        this.menuFilteredList = this.menuList.map((group) => ({
+          ...group,
+          items: group.items.map((item) => ({
+            ...item,
+            image: this.cdn.image(item?.image as string || 'no_image_placeholder').resize(
+              thumbnail()
+                .width(75)
+                .height(75)
+            ).delivery(quality(auto()))
+              .delivery(format(auto()))
+              .roundCorners(byRadius(20))
+          }))
+        }));
+        
       },
       error: (error) => console.error(error),
     })
-  }
-
-  selectGroup(groupId: string) {
-    this.selectedGroup = !groupId ? null : this.menuList.find(({ id }) => id === groupId) as IMenu;
-
-    this.menuFilteredList = !this.selectedGroup  
-      ? this.menuList
-      : [this.selectedGroup]
   }
 
   editGroup(groupId: string) {
@@ -185,3 +249,7 @@ export class MenuComponent implements OnInit {
     })
   }
 }
+function face(): import("@cloudinary/transformation-builder-sdk/qualifiers/gravity/qualifiers/focusOn/FocusOnValue").FocusOnValue {
+  throw new Error('Function not implemented.');
+}
+

@@ -1,3 +1,4 @@
+import { CloudinaryImage } from '@cloudinary/url-gen';
 import { APP } from '../app.type';
 
 export interface MenuGroupBase {
@@ -32,12 +33,21 @@ export interface IMenuIteBase {
 
 export interface IMenuItem extends IMenuIteBase {
   groupId: string;
+  image: string ;
+
 }
 
 export interface IMenu extends MenuGroup {
   items: IMenuItem[];
 }
 
+export interface IMenuItemCdn extends IMenuIteBase{
+  image: CloudinaryImage;
+}
+
+export interface IMenuCdn extends MenuGroup {
+  items: IMenuItemCdn[];
+}
 export interface MenuItemDialogData extends IMenuItem {
   mode: APP.DialogMode,
   groups: MenuGroup[],
