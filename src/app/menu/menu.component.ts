@@ -8,10 +8,9 @@ import { MenuGroupDialogComponent } from './menu-group-dialog/menu-group-dialog.
 import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Cloudinary, CloudinaryImage, CloudinaryFile } from '@cloudinary/url-gen';
+import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { environment } from 'src/environments/environment';
 import { thumbnail } from '@cloudinary/url-gen/actions/resize';
-import { focusOn } from '@cloudinary/url-gen/qualifiers/gravity';
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import { format, quality } from '@cloudinary/url-gen/actions/delivery';
 import { auto } from '@cloudinary/url-gen/qualifiers/quality';
@@ -19,6 +18,7 @@ import { lazyload, placeholder } from '@cloudinary/ng';
 import { Plugins } from '@cloudinary/html';
 
 import * as cdnRes from '@cloudinary/url-gen';
+import { ImageModalComponent } from './image-modal/image-modal.component';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -69,7 +69,7 @@ export class MenuComponent implements OnInit {
         folder: "menu", //upload files to the specified folder
         // tags: ["users", "profile"], //add the given tags to the uploaded files
         // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
-        clientAllowedFormats: ['jpg', 'png', 'webp'], //restrict uploading to image files only
+        clientAllowedFormats: ['jpg', 'jpeg', 'png', 'webp'], //restrict uploading to image files only
         // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
         // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
         // theme: "purple", //change to a purple theme
@@ -112,7 +112,7 @@ export class MenuComponent implements OnInit {
           ...group,
           items: group.items.map((item) => ({
             ...item,
-            image: this.cdn.image(item?.image as string || 'no_image_placeholder').resize(
+            imageCdn: this.cdn.image(item?.image as string || 'no_image_placeholder').resize(
               thumbnail()
                 .width(75)
                 .height(75)
@@ -248,8 +248,14 @@ export class MenuComponent implements OnInit {
       }
     })
   }
+
+  openImageModal(publicId: string, name: string) {
+    this.dialog.open(
+      ImageModalComponent, {
+        data: { publicId, name, cdnName: environment.cdnName }
+      }
+    )
+  }
 }
-function face(): import("@cloudinary/transformation-builder-sdk/qualifiers/gravity/qualifiers/focusOn/FocusOnValue").FocusOnValue {
-  throw new Error('Function not implemented.');
-}
+
 

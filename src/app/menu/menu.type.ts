@@ -42,7 +42,8 @@ export interface IMenu extends MenuGroup {
 }
 
 export interface IMenuItemCdn extends IMenuIteBase{
-  image: CloudinaryImage;
+  image: string;
+  imageCdn: CloudinaryImage;
 }
 
 export interface IMenuCdn extends MenuGroup {
@@ -63,4 +64,10 @@ export interface IMenuDeleteConfirmationData {
   type: typeof MENU_ENTITY_TYPE[keyof typeof MENU_ENTITY_TYPE];
   menu: IMenu[];
   groupId: string;
+}
+
+export interface IImageModalData {
+  publicId: string;
+  cdnName: string;
+  name: string;
 }

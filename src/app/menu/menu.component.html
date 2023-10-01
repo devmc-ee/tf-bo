@@ -59,7 +59,7 @@
                 </span>
               </div>
               <div class="menu-items__group-item-content-item menu-items__group-item-image">
-                <span><advanced-image [cldImg]="item.image" [plugins]="plugins"></advanced-image></span>
+                <span><advanced-image [class]="item.image ? 'cursor-pointer' : ''" (click)="item.image ? openImageModal(item.image, item.name): null" [cldImg]="item.imageCdn" [plugins]="plugins"></advanced-image></span>
               </div>
               <div class="menu-items__group-item-content-item menu-items__group-item-code">
                 <span class="menu-items__group-item-content-item-label">Code</span>

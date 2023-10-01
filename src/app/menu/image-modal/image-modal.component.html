@@ -1,0 +1,14 @@
+<div class="image-modal">
+  <div class="image-modal__header">
+    <h1 mat-dialog-title class="image-modal__header-title">
+      {{data.name}}
+    </h1> 
+    <button class="image-modal__header-close-button" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content class="image-modal__content">
+    <advanced-image [cldImg]="imageCdn" [plugins]="plugins"></advanced-image>
+  </div>
+</div>
+
