@@ -4,5 +4,4 @@ export const environment = {
   apiUrl: 'https://api.milicity.eu',
   cdnName: 'dqpl2cxxa',
   cdnUploadPreset: 'thaifood',
-  defaultImageId: 'no_image_placeholder',
 };

@@ -4,5 +4,4 @@ export const environment = {
   apiUrl: 'http://localhost:5003',
   cdnName: 'dt7jbtkxo',
   cdnUploadPreset: 'thaifood',
-  defaultImageId: 'no_image_placeholder',
 };

@@ -1,4 +1,3 @@
-import { environment } from 'src/environments/environment';
 import { IMenuItem } from '../menu.type';
 
 export class MenuItemDto {
@@ -10,7 +9,7 @@ export class MenuItemDto {
   soldOut = false;
   price = '';
   code = '';
-  image = environment.defaultImageId;
+  image = '';
 
   constructor(group: Partial<IMenuItem>) {
     const entries = [];
